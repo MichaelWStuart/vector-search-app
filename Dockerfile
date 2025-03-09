@@ -7,4 +7,4 @@ RUN npm install --include=dev
 
 COPY . .
 
-CMD ["sh", "-c", "echo OPENAI_API_KEY=$OPENAI_API_KEY && npx ts-node src/index.ts"]
+CMD ["sh", "-c", "printenv | grep OPENAI_API_KEY && npx ts-node src/index.ts"]
