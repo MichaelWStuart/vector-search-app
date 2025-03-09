@@ -4,15 +4,20 @@ services:
         restart: always
         ports:
             - "3000:3000"
+            - "8000:8000"
         environment:
-            - DATABASE_URL=postgresql://postgres:password@db:5432/postgres
-            - CHROMADB_HOST=http://chromadb:8000
+            - DATABASE_URL=postgresql://postgres:password@your-railway-db-url.com:5432/postgres
+            - CHROMADB_HOST=http://localhost:8000
             - CHROMADB_COLLECTION=text_embeddings
-        depends_on:
-            - db
-            - chromadb
+            - CHROMA_DB_IMPLEMENTATION=sqlite
+            - CHROMA_DB_PATH=/chroma/chroma.sqlite3
+        volumes:
+            - chromadb_data:/chroma
         networks:
             - backend
+        depends_on:
+            - db
+
     db:
         image: postgres:16
         restart: always
@@ -26,20 +31,10 @@ services:
             - postgres_data:/var/lib/postgresql/data
         networks:
             - backend
-    chromadb:
-        image: ghcr.io/chroma-core/chroma:latest
-        restart: always
-        ports:
-            - "8000:8000"
-        environment:
-            CHROMA_DB_IMPLEMENTATION: sqlite
-            CHROMA_DB_PATH: /chroma/chroma.sqlite3
-        volumes:
-            - chromadb_data:/chroma
-        networks:
-        - backend
+
 networks:
     backend:
+
 volumes:
     postgres_data:
     chromadb_data:
