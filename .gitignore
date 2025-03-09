@@ -1,0 +1,7 @@
+node_modules/
+.env
+postgres_data/
+chromadb_data/
+logs/
+*.log
+scripts/
