@@ -7,4 +7,4 @@ RUN npm install --include=dev
 
 COPY . .
 
-CMD ["sh", "-c", "env && npx ts-node src/index.ts"]
+CMD ["sh", "-c", "printenv && npx ts-node src/index.ts"]
