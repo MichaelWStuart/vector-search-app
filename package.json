@@ -1,0 +1,29 @@
+{
+    "name": "vector-search-app",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "chromadb": "^1.10.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "openai": "^4.86.2",
+        "pg": "^8.13.3",
+        "pg-pool": "^3.7.1"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.0",
+        "@types/node": "^22.13.10",
+        "@types/pg": "^8.11.11",
+        "axios": "^1.8.2",
+        "cheerio": "^1.0.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.2"
+    }
+}

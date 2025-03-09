@@ -1,0 +1,45 @@
+services:
+    app:
+        build: .
+        restart: always
+        ports:
+            - "3000:3000"
+        environment:
+            - DATABASE_URL=postgresql://postgres:password@db:5432/postgres
+            - CHROMADB_HOST=http://chromadb:8000
+            - CHROMADB_COLLECTION=text_embeddings
+        depends_on:
+            - db
+            - chromadb
+        networks:
+            - backend
+    db:
+        image: postgres:16
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: postgres
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        networks:
+            - backend
+    chromadb:
+        image: ghcr.io/chroma-core/chroma:latest
+        restart: always
+        ports:
+            - "8000:8000"
+        environment:
+            CHROMA_DB_IMPLEMENTATION: sqlite
+            CHROMA_DB_PATH: /chroma/chroma.sqlite3
+        volumes:
+            - chromadb_data:/chroma
+        networks:
+        - backend
+networks:
+    backend:
+volumes:
+    postgres_data:
+    chromadb_data:
