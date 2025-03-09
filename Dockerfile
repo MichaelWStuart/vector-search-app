@@ -3,7 +3,7 @@ FROM node:20
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm install --only=production
+RUN npm install --include=dev
 
 COPY . .
 
