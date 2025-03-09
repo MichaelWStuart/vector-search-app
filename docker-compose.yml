@@ -11,7 +11,7 @@ services:
             - CHROMADB_COLLECTION=text_embeddings
             - CHROMA_DB_IMPLEMENTATION=sqlite
             - CHROMA_DB_PATH=/chroma/chroma.sqlite3
-            - OPENAI_API_KEY=${OPENAI_API_KEY}
+            - OPENAI_API_KEY=$OPENAI_API_KEY
         volumes:
             - chromadb_data:/chroma
         networks:
